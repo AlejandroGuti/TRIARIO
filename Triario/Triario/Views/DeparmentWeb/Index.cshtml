@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Triario.Models.Department>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a class="btn btn-primary" href="~/DeparmentWeb/create">New Department </a>
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id_Department)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>    
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id_Department)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="~/DeparmentWeb/Edit/@item.Id_Department">Edit </a>
+                    <a class="btn btn-danger" href="~/DeparmentWeb/Delete/@item.Id_Department">Delete </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+

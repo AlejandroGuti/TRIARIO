@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TriarioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="Id_Department" />
+    </Key>
+    <Property Name="id_num" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_Department" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Employee" Relationship="Self.Fk_Department_Employee" FromRole="Department" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="CC" />
+    </Key>
+    <Property Name="id_num" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CC" Type="Int32" Nullable="false" />
+    <Property Name="FName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="EUser" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Salary" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Fk_Department" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Department" Relationship="Self.Fk_Department_Employee" FromRole="Employee" ToRole="Department" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="Fk_Department_Employee">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="Id_Department" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="Fk_Department" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TriarioEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Department" EntityType="Self.Department" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <AssociationSet Name="Fk_Department_Employee" Association="Self.Fk_Department_Employee">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <FunctionImport Name="Actualizate_Department">
+      <Parameter Name="Id_Department" Mode="In" Type="String" />
+      <Parameter Name="Name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Actualizate_Employee">
+      <Parameter Name="CC" Mode="In" Type="Int32" />
+      <Parameter Name="FName" Mode="In" Type="String" />
+      <Parameter Name="LName" Mode="In" Type="String" />
+      <Parameter Name="EUser" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Salary" Mode="In" Type="Decimal" />
+      <Parameter Name="Fk_Department" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Create_Department">
+      <Parameter Name="Id_Department" Mode="In" Type="String" />
+      <Parameter Name="Name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Create_Employee">
+      <Parameter Name="CC" Mode="In" Type="Int32" />
+      <Parameter Name="FName" Mode="In" Type="String" />
+      <Parameter Name="LName" Mode="In" Type="String" />
+      <Parameter Name="EUser" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Salary" Mode="In" Type="Decimal" />
+      <Parameter Name="Fk_Department" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Delete_Department">
+      <Parameter Name="Id_Department" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Delete_Employee">
+      <Parameter Name="CC" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Search_Department" ReturnType="Collection(TriarioModel.Search_Department_Result)">
+      <Parameter Name="Id_Department" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Search_Employee" ReturnType="Collection(TriarioModel.Search_Employee_Result)">
+      <Parameter Name="CC" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(TriarioModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(TriarioModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="Sum_Department" ReturnType="Collection(Decimal)" />
+    <FunctionImport Name="Sum_Salary_Department" ReturnType="Collection(TriarioModel.Sum_Salary_Department_Result)">
+      <Parameter Name="Id_Department" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="Search_Department_Result">
+    <Property Type="Int32" Name="id_num" Nullable="false" />
+    <Property Type="String" Name="Id_Department" Nullable="false" MaxLength="5" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="Search_Employee_Result">
+    <Property Type="Int32" Name="id_num" Nullable="false" />
+    <Property Type="Int32" Name="CC" Nullable="false" />
+    <Property Type="String" Name="FName" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="LName" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="EUser" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+    <Property Type="Decimal" Name="Salary" Nullable="true" Precision="19" />
+    <Property Type="String" Name="Fk_Department" Nullable="true" MaxLength="5" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Sum_Salary_Department_Result">
+    <Property Type="Decimal" Name="Sum_Salary" Nullable="true" Precision="19" />
+    <Property Type="String" Name="Id_Department" Nullable="false" MaxLength="5" />
+  </ComplexType>
+</Schema>

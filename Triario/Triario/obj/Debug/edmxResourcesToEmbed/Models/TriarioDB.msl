@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TriarioModelStoreContainer" CdmEntityContainer="TriarioEntities1">
+    <EntitySetMapping Name="Department">
+      <EntityTypeMapping TypeName="TriarioModel.Department">
+        <MappingFragment StoreEntitySet="Department">
+          <ScalarProperty Name="id_num" ColumnName="id_num" />
+          <ScalarProperty Name="Id_Department" ColumnName="Id_Department" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employee">
+      <EntityTypeMapping TypeName="TriarioModel.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="id_num" ColumnName="id_num" />
+          <ScalarProperty Name="CC" ColumnName="CC" />
+          <ScalarProperty Name="FName" ColumnName="FName" />
+          <ScalarProperty Name="LName" ColumnName="LName" />
+          <ScalarProperty Name="EUser" ColumnName="EUser" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+          <ScalarProperty Name="Fk_Department" ColumnName="Fk_Department" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="TriarioModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Actualizate_Department" FunctionName="TriarioModel.Store.Actualizate_Department" />
+    <FunctionImportMapping FunctionImportName="Actualizate_Employee" FunctionName="TriarioModel.Store.Actualizate_Employee" />
+    <FunctionImportMapping FunctionImportName="Create_Department" FunctionName="TriarioModel.Store.Create_Department" />
+    <FunctionImportMapping FunctionImportName="Create_Employee" FunctionName="TriarioModel.Store.Create_Employee" />
+    <FunctionImportMapping FunctionImportName="Delete_Department" FunctionName="TriarioModel.Store.Delete_Department" />
+    <FunctionImportMapping FunctionImportName="Delete_Employee" FunctionName="TriarioModel.Store.Delete_Employee" />
+    <FunctionImportMapping FunctionImportName="Search_Department" FunctionName="TriarioModel.Store.Search_Department">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TriarioModel.Search_Department_Result">
+          <ScalarProperty Name="id_num" ColumnName="id_num" />
+          <ScalarProperty Name="Id_Department" ColumnName="Id_Department" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Search_Employee" FunctionName="TriarioModel.Store.Search_Employee">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TriarioModel.Search_Employee_Result">
+          <ScalarProperty Name="id_num" ColumnName="id_num" />
+          <ScalarProperty Name="CC" ColumnName="CC" />
+          <ScalarProperty Name="FName" ColumnName="FName" />
+          <ScalarProperty Name="LName" ColumnName="LName" />
+          <ScalarProperty Name="EUser" ColumnName="EUser" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+          <ScalarProperty Name="Fk_Department" ColumnName="Fk_Department" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="TriarioModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="TriarioModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="TriarioModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="TriarioModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TriarioModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="TriarioModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TriarioModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="TriarioModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="TriarioModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="Sum_Department" FunctionName="TriarioModel.Store.Sum_Department" />
+    <FunctionImportMapping FunctionImportName="Sum_Salary_Department" FunctionName="TriarioModel.Store.Sum_Salary_Department">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TriarioModel.Sum_Salary_Department_Result">
+          <ScalarProperty Name="Sum_Salary" ColumnName="Sum_Salary" />
+          <ScalarProperty Name="Id_Department" ColumnName="Id_Department" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>
